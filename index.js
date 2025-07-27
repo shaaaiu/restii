@@ -5,7 +5,7 @@ const cors = require("cors")
 const path = require("path")
 
 // Import file function.js (hanya jika ada efek samping atau global)
-require("./helpers.js")
+require("./function.js")
 
 const app = express()
 const PORT = process.env.PORT || 3000
