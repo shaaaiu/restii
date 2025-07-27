@@ -2,7 +2,7 @@ module.exports = (app) => {
   app.get("/ai/brat", async (req, res) => {
     try {
       const { apikey, text } = req.query
-      if (!apikey || !global.apikeyf.includes(apikey)) {
+      if (!apikey || !global.apikeyp.includes(apikey)) {
         return res.json({ status: false, error: "Invalid or missing API key" })
       }
       const pedo = await getBuffer(`https://brat.caliphdev.com/api/brat?text=${text}`)
