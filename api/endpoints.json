@@ -64,13 +64,6 @@
           "premium": false
     },
     {
-      "name": "Brat",
-      "desc": "Brat text generator",
-      "status": "Active",
-      "path": "/ai/brat?text=&apikey=",
-      "premium": false
-    },
-    {
       "name": "Brat Video",
       "desc": "Brat text generator",
       "status": "Active",
@@ -84,6 +77,13 @@
       "desc": "Membuat Image Realistic",
       "status": "Active",
       "path": "/aiimage/realistic?text=&apikey=",
+      "premium": true
+          },
+    {
+      "name": "Brat",
+      "desc": "Brat text generator",
+      "status": "Active",
+      "path": "/aivid/brat?text=&apikey=",
       "premium": true
     }
   ],
