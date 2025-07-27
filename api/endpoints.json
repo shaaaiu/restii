@@ -1,46 +1,113 @@
 {
   "openai": [
     {
-      "name": "Deepseek",
-      "desc": "Deepseek ai",
-      "status": "Active",
-      "path": "/ai/deepseek?text=&apikey=",
-      "premium": false
+          "name": "Dopple AI",
+          "desc": "Talk with Dopple AI",
+          "status": "Active",
+          "path": "/ai/dopple?text=&apikey=",
+          "premium": false
     },
     {
-      "name": "Openai",
-      "desc": "Openai chat",
-      "status": "Active",
-      "path": "/ai/openai?text=&apikey=",
-      "premium": false
+          "name": "Islam AI",
+          "desc": "Talk with Islam AI",
+          "status": "Active",
+          "path": "/ai/islam?text=&apikey=",
+          "premium": false
     },
     {
-      "name": "Gemini",
-      "desc": "Gemini ai chat",
+          "name": "Felo AI",
+          "desc": "Talk with Felo AI",
+          "status": "Active",
+          "path": "/ai/felo?text=&apikey=",
+          "premium": false
+    },
+    {
+          "name": "Gemini AI",
+          "desc": "Talk with Gemini AI",
+          "status": "Active",
+          "path": "/ai/gemini?text=&apikey=",
+          "premium": false
+    },
+    {
+          "name": "Claude AI",
+          "desc": "Talk with Claude AI",
+          "status": "Active",
+          "path": "/ai/claude?text=&apikey=",
+          "premium": false
+    },
+    {
+          "name": "ChatGpt AI",
+          "desc": "Talk with ChatGpt AI",
+          "status": "Active",
+          "path": "/ai/chatgpt?text=&apikey=",
+          "premium": false
+    },
+    {
+          "name": "Blackbox AI",
+          "desc": "Blacbox AI",
+          "status": "Active",
+          "path": "/ai/blackbox?text=&apikey=",
+          "premium": false
+    },
+    {
+          "name": "Koyuki AI",
+          "desc": "Talk with Koyuki AI",
+          "status": "Active",
+          "path": "/ai/koyuki?text=&apikey=",
+          "premium": false
+    },
+    {
+          "name": "Lumin AI",
+          "desc": "Talk with Lumin AI",
+          "status": "Active",
+          "path": "/ai/lumin?text=&apikey=",
+          "premium": false
+    }
+  ],
+  "ai-image": [
+    {
+      "name": "Ryuu-Ai Image",
+      "desc": "Membuat Image Realistic",
       "status": "Active",
-      "path": "/ai/gemini?text=&apikey=",
-      "premium": false
+      "path": "/aiimage/realistic?text=&apikey=",
+      "premium": true
+    }
+  ],
+  "Ai-Video": [
+    {
+      "name": "Text To Video 1",
+      "desc": "Membuat Video Dengan Text Mu",
+      "status": "Active",
+      "path": "/aivid/gveo3?text=&apikey=",
+      "premium": true
+    },
+    {
+          "name": "Text To Video 2",
+          "desc": "Membuat Video Dengan Text Mu",
+          "status": "Active",
+          "path": "/aivid/gveo3-2?text=&apikey=",
+          "premium": true
     }
   ],
   "orderkuota": [
     {
       "name": "Create Payment",
       "desc": "Create qris payment",
-      "status": "Active",
+      "status": "Error",
       "path": "/orderkuota/createpayment?amount=&codeqr=&apikey=",
       "premium": true
     },
     {
       "name": "Cek Status",
       "desc": "Cek status payment",
-      "status": "Active",
+      "status": "Error",
       "path": "/orderkuota/cekstatus?merchant=&keyorkut=&apikey=",
       "premium": true
     },
     {
       "name": "Cek Saldo",
       "desc": "To check the balance of the quota order account",
-      "status": "Active",
+      "status": "Error",
       "path": "/tools/ceksaldo?memberID=&pin=&password=&apikey=",
       "premium": true
     }
@@ -201,192 +268,7 @@
       "status": "Active",
       "path": "/random/cek-nomor?nomor=&apikey=",
       "premium": false
-    }
-  ],
-  "search": [
-    {
-      "name": "Youtube Search",
-      "desc": "Search youtube video",
-      "status": "Active",
-      "path": "/search/youtube?q=&apikey=",
-      "premium": false
-    },
-    {
-      "name": "Tiktok Search",
-      "desc": "Search tiktok video",
-      "status": "Active",
-      "path": "/search/tiktok?q=&apikey=",
-      "premium": false
-    },
-    {
-      "name": "Npm Search",
-      "desc": "Search npm nodejs",
-      "status": "Active",
-      "path": "/search/npm?q=&apikey=",
-      "premium": false
-    },
-    {
-      "name": "Bingimage",
-      "desc": "Search bingimage foto",
-      "status": "Active",
-      "path": "/search/bingimage?q=&apikey=",
-      "premium": false
-    },
-    {
-      "name": "Bstation Search",
-      "desc": "Bstation video search",
-      "status": "Active",
-      "path": "/search/bstation-search?q=&apikey=",
-      "premium": false
-    },
-    {
-      "name": "Pinterest",
-      "desc": "Search pinterest foto",
-      "status": "Active",
-      "path": "/search/pinterest?q=&apikey=",
-      "premium": false
-    },
-    {
-      "name": "Gimage",
-      "desc": "Search google image",
-      "status": "Active",
-      "path": "/search/gimage?q=&apikey=",
-      "premium": false
-    },
-    {
-      "name": "Spotify Search",
-      "desc": "Search spotify music",
-      "status": "Active",
-      "path": "/search/spotify?q=&apikey=",
-      "premium": false
-    },
-    {
-      "name": "Playstore",
-      "desc": "Search playstore apk",
-      "status": "Active",
-      "path": "/search/playstore?q=&apikey=",
-      "premium": false
-    },
-    {
-      "name": "Happymod",
-      "desc": "Search happymod apk",
-      "status": "Active",
-      "path": "/search/happymod?q=&apikey=",
-      "premium": false
-    },
-    {
-      "name": "XNXX Search",
-      "desc": "Search xnxx video",
-      "status": "Active",
-      "path": "/search/xnxx?q=&apikey=",
-      "premium": true
-    }
-  ],
-  "tools": [
-    {
-      "name": "Text-to-speech",
-      "desc": "Tts anime character",
-      "status": "Active",
-      "path": "/tools/text-to-speech?text=&apikey=",
-      "premium": false
-    },
-    {
-      "name": "Screenshot Web",
-      "desc": "Screenshot web url",
-      "status": "Active",
-      "path": "/tools/ssweb?url=&apikey=",
-      "premium": false
-    },
-    {
-      "name": "Emoji To Gif",
-      "desc": "Convert emoji to gif",
-      "status": "Active",
-      "path": "/tools/emojitogif?emoji=&apikey=",
-      "premium": false
-    },
-    {
-      "name": "IP Lookup",
-      "desc": "Lookup domain of ip address",
-      "status": "Active",
-      "path": "/tools/iplookup?q=&apikey=",
-      "premium": false
-    },
-    {
-      "name": "Whois",
-      "desc": "Get dns record information",
-      "status": "Active",
-      "path": "/tools/whois?dns=&apikey=",
-      "premium": false
-    },
-    {
-      "name": "Shorturl tinyurl",
-      "desc": "Shortner url tinyurl.com",
-      "status": "Active",
-      "path": "/tools/tinyurl?url=&apikey=",
-      "premium": false
-    },
-    {
-      "name": "Whoip",
-      "desc": "Get ip address information",
-      "status": "Active",
-      "path": "/tools/whoip?ip=&apikey=",
-      "premium": false
-    },
-    {
-      "name": "Emoji Mix",
-      "desc": "Emoji mix converter",
-      "status": "Active",
-      "path": "/tools/emojimix?emoji1=&emoji2=&apikey=",
-      "premium": false
-    },
-    {
-      "name": "Cek Gempa",
-      "desc": "Displaying the latest earthquake information",
-      "status": "Active",
-      "path": "/tools/cekgempa?apikey=",
-      "premium": false
-    },
-    {
-      "name": "Cek Cuaca",
-      "desc": "Check weather information for a city",
-      "status": "Active",
-      "path": "/tools/cekcuaca?kota=&apikey=",
-      "premium": false
-    },
-    {
-      "name": "Cek Kode Pos",
-      "desc": "Chek Postal code in your city",
-      "status": "Active",
-      "path": "/tools/cekkodepos?q=&apikey=",
-      "premium": false
-    },
-    {
-      "name": "Jadwal sholat",
-      "desc": "Chek prayer times in your area!",
-      "status": "Active",
-      "path": "/tools/jadwalsholat?kota=&apikey=",
-      "premium": false
-    },
-    {
-      "name": "Convert Uang",
-      "desc": "Convert money to other currencies!",
-      "status": "Active",
-      "path": "/tools/convert-uang?from=&to=&amount=&apikey=",
-      "premium": false
-    },
-    {
-      "name": "Text To Kode Morse",
-      "desc": "create morse code ",
-      "status": "Active",
-      "path": "/tools/text2morse?text=&apikey=",
-      "premium": false
-    },
-    {
-      "name": "Morse Code To Text",
-      "desc": "translate morse code to text",
-      "status": "Active",
-      "path": "/tools/morse2text?morse=&apikey=",
-      "premium": false
+
     }
   ],
   "stalker": [
@@ -433,212 +315,24 @@
       "premium": false
     },
     {
+     "name": "Mobile Legends Stalk",
+     "desc": "Stalk mobile legends account",
+      "status": "Active",
+     "path": "/stalk/mlbb2?userId=&zoneId=&apikey=", 
+      "premium": true
+        }, 
+        {
       "name": "FF Stalk",
       "desc": "Stalk free fire account",
       "status": "Active",
       "path": "/stalk/ff?id=&apikey=",
       "premium": false
-    }
-  ],
-  "creator": [
-    {
-      "name": "Remini",
-      "desc": "Remini image",
+        }, 
+        {
+      "name": "FF Stalk 2",
+      "desc": "Stalk free fire account",
       "status": "Active",
-      "path": "/imagecreator/remini?url=&apikey=",
-      "premium": true
-    },
-    {
-      "name": "Removebg",
-      "desc": "Remove background image",
-      "status": "Active",
-      "path": "/imagecreator/removebg?url=&apikey=",
-      "premium": true
-    },
-    {
-      "name": "Upscale",
-      "desc": "Upscale image",
-      "status": "Active",
-      "path": "/imagecreator/upscale?url=&apikey=",
-      "premium": true
-    },
-    {
-      "name": "Colorize",
-      "desc": "Colorize image",
-      "status": "Active",
-      "path": "/imagecreator/colorize?url=&apikey=",
-      "premium": true
-    },
-    {
-      "name": "Brat",
-      "desc": "Brat text generator",
-      "status": "Active",
-      "path": "/imagecreator/brat?text=&apikey=",
-      "premium": false
-    },
-    {
-      "name": "Brat Video",
-      "desc": "Brat animated text generator",
-      "status": "Active",
-      "path": "/imagecreator/bratvideo?text=&apikey=",
-      "premium": false
-    },
-    {
-      "name": "Nulis Buku",
-      "desc": "To write text in a book",
-      "status": "Active",
-      "path": "/imagecreator/nulis?text=&name=&class=&apikey=",
-      "premium": false
-    },
-    {
-      "name": "To Hijab",
-      "desc": "Make a photo wearing a hijab",
-      "status": "Active",
-      "path": "/imagecreator/to-hijab?imageUrl=&apikey=",
-      "premium": true
-    },
-    {
-      "name": "Text To Ghibli",
-      "desc": "Generete Ghibli with text",
-      "status": "Active",
-      "path": "/imagecreator/text2ghibli?text=&apikey=",
-      "premium": true
-    },
-    {
-      "name": "Text To Anime",
-      "desc": "Generete Anime with text",
-      "status": "Active",
-      "path": "/imagecreator/text2anime?text=&ratio=&apikey=",
-      "premium": true
-    },
-    {
-      "name": "Brat Anime",
-      "desc": "Generete Brat with Anime",
-      "status": "Active",
-      "path": "/imagecreator/bratanime?text=&apikey=",
-      "premium": false
-    },
-    {
-      "name": "vcc generator",
-      "desc": "",
-      "status": "Active",
-      "path": "/imagecreator/vcc?apikey=",
-      "premium": false
-    },
-    {
-      "name": "ktp maker",
-      "desc": "",
-      "status": "Active",
-      "path": "/imagecreator/ktp-maker?nama=&nik=&ttl=&jk=&alamat=&agama=&status=&pekerjaan=&kewarganegaraan=&image=&apikey=",
-      "premium": true
-    }
-  ],
-  "berita": [
-    {
-      "name": "Liputan6 News",
-      "desc": "News In Liputan6",
-      "status": "Active",
-      "path": "/berita/liputan6?apikey=",
-      "premium": false
-    },
-    {
-      "name": "cnbc news",
-      "desc": "News In cnbc",
-      "status": "Active",
-      "path": "/berita/cnbc?apikey=",
-      "premium": false
-    },
-    {
-      "name": "cnn news",
-      "desc": "News In cnn",
-      "status": "Active",
-      "path": "/berita/cnn?apikey=",
-      "premium": false
-    },
-    {
-      "name": "JKT48 news",
-      "desc": "News In JKT48",
-      "status": "Active",
-      "path": "/berita/jkt48?apikey=",
-      "premium": false
-    },
-    {
-      "name": "Antara news",
-      "desc": "News In Antara",
-      "status": "Active",
-      "path": "/berita/antara?apikey=",
-      "premium": false
-    },
-    {
-      "name": "Merdeka news",
-      "desc": "News In merdeka",
-      "status": "Active",
-      "path": "/berita/merdeka?apikey=",
-      "premium": false
-    },
-    {
-      "name": "tribun news",
-      "desc": "News In tribun",
-      "status": "Active",
-      "path": "/berita/tribun?apikey=",
-      "premium": false
-    }
-  ],
-  "Game": [
-    {
-      "name": "Tebak JKT48",
-      "desc": "",
-      "status": "Active",
-      "path": "/game/tebakjkt?apikey=",
-      "premium": false
-    },
-    {
-      "name": "Tebak Bendera",
-      "desc": "",
-      "status": "Active",
-      "path": "/game/tebakbendera?apikey=",
-      "premium": false
-    },
-    {
-      "name": "Tebak Anime",
-      "desc": "",
-      "status": "Active",
-      "path": "/game/anime?apikey=",
-      "premium": false
-    },
-    {
-      "name": "Tebak Negara",
-      "desc": "",
-      "status": "Active",
-      "path": "/game/negara?apikey=",
-      "premium": false
-    },
-    {
-      "name": "Tebak Matematika",
-      "desc": "",
-      "status": "Active",
-      "path": "/game/matematika?apikey=",
-      "premium": false
-    },
-    {
-      "name": "Tebak Lirik",
-      "desc": "",
-      "status": "Active",
-      "path": "/game/tebaklirik?apikey=",
-      "premium": false
-    },
-    {
-      "name": "Tebak Kata",
-      "desc": "",
-      "status": "Active",
-      "path": "/game/tebakkata?apikey=",
-      "premium": false
-    },
-    {
-      "name": "Tebak Hero ML",
-      "desc": "",
-      "status": "Active",
-      "path": "/game/tebakheroml?apikey=",
+      "path": "/stalk/ff2?uid=&apikey=",
       "premium": false
     }
   ],
