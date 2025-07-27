@@ -62,6 +62,20 @@
           "status": "Active",
           "path": "/ai/lumin?text=&apikey=",
           "premium": false
+    },
+    {
+      "name": "Brat",
+      "desc": "Brat text generator",
+      "status": "Active",
+      "path": "/ai/brat?text=&apikey=",
+      "premium": false
+    },
+    {
+      "name": "Brat Video",
+      "desc": "Brat text generator",
+      "status": "Active",
+      "path": "/ai/bratvid?text=&apikey=",
+      "premium": false
     }
   ],
   "ai-image": [
