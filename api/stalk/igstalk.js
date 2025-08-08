@@ -142,7 +142,7 @@ class DumPor {
 }
 
 module.exports = (app) => {
-  app.get("/stalk/instagram", async (req, res) => {
+  app.get("/stalk/igstalk", async (req, res) => {
     const { apikey } = req.query
     if (!global.apikeyf.includes(apikey)) return res.json({ status: false, error: "Apikey invalid" })
     const { username } = req.query
