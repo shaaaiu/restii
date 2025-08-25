@@ -104,12 +104,12 @@
     }
   ],
   "orderkuota": [
-{
-  "name": "Orkut Login",
-  "desc": "Login & ambil OTP",
-  "status": "Active",
-  "path": "/orderkuota/otp?username=&password=&apikey=",
-  "premium": true
+    {
+      "name": "Create Payment",
+      "desc": "Create qris payment",
+      "status": "Error",
+      "path": "/orderkuota/createpayment?amount=&codeqr=&apikey=",
+      "premium": true
     },
     {
       "name": "Cek Status",
