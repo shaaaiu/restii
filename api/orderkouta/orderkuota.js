@@ -1,7 +1,7 @@
 const express = require("express")
 const axios = require("axios")
+
 const app = express()
-const port = 3000
 
 // daftar apikey yang diizinkan
 global.apikeyp = ["freeApikey"]
@@ -19,7 +19,7 @@ app.get("/orderkuota/login", async (req, res) => {
 
   try {
     const apiUrl = `https://anabot.my.id/api/tools/orderKuota/login?username=${username}&password=${password}&apikey=${apikey}`
-    const response = await axios.get(apiUrl)
+    const response = await axios.get(apiUrl, { timeout: 8000 })
     const result = response.data
 
     res.status(200).json({
@@ -31,8 +31,8 @@ app.get("/orderkuota/login", async (req, res) => {
   }
 })
 
-// contoh endpoint lain (scrape hasil OTP email)
-app.get("/orderkuota/otp", async (req, res) => {
+// Endpoint OTP
+app.get("/orderkuota/createpayment", async (req, res) => {
   const { username, password, apikey } = req.query
 
   if (!apikey || !global.apikeyp.includes(apikey)) {
@@ -44,7 +44,7 @@ app.get("/orderkuota/otp", async (req, res) => {
 
   try {
     const apiUrl = `https://anabot.my.id/api/tools/orderKuota/login?username=${username}&password=${password}&apikey=${apikey}`
-    const response = await axios.get(apiUrl)
+    const response = await axios.get(apiUrl, { timeout: 8000 })
     const result = response.data
 
     if (result?.data?.result?.results) {
@@ -61,6 +61,6 @@ app.get("/orderkuota/otp", async (req, res) => {
   }
 })
 
-app.listen(port, () => {
-  console.log(`✅ Server running at http://localhost:${port}`)
-})
+// ❌ Jangan pakai app.listen()
+// ✅ Vercel perlu export default app
+module.exports = app
