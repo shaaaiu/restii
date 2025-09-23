@@ -1,5 +1,6 @@
+Tolong ubahin
 {
-  "name": "Krizz Api's",
+  "name": "RyuuXiao Api's",
   "version": "1.0.0",
   "description": "Simple REST API with easy and minimalistic integration for WhatsApp Bot Developers",
   "main": "index.js",
@@ -20,7 +21,6 @@
   ],
   "author": "krsna_081",
   "license": "MIT",
-  "type": "module",
   "dependencies": {
     "@google/generative-ai": "^0.2.1",
     "axios": "^1.6.2",
@@ -33,7 +33,7 @@
     "file-type": "^16.5.4",
     "form-data": "^4.0.0",
     "moment-timezone": "^0.5.43",
-    "node-fetch": "^3.3.2",
+    "node-fetch": "^2.7.0",
     "node-upload-images": "^1.0.1",
     "qrcode": "^1.5.3",
     "qs": "^6.11.2",
