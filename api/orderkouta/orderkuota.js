@@ -1,7 +1,10 @@
+const express = require("express");
 const axios = require("axios");
 const crypto = require("crypto");
 const QRCode = require("qrcode");
 const { URLSearchParams } = require("url");
+
+const app = express();
 
 // === CLASS OrderKuota ===
 class OrderKuota {
@@ -32,6 +35,7 @@ class OrderKuota {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
         data: body ? body.toString() : null,
+        timeout: 15000
       });
       return res.data;
     } catch (err) {
@@ -129,24 +133,6 @@ class OrderKuota {
     });
     return await this.request('POST', `${OrderKuota.API_URL}/get`, payload);
   }
-
-  // === BARU: Ambil profil/account doang ===
-  async getAccount() {
-    const payload = new URLSearchParams({
-      request_time: Date.now(),
-      app_reg_id: OrderKuota.APP_REG_ID,
-      phone_android_version: OrderKuota.PHONE_ANDROID_VERSION,
-      app_version_code: OrderKuota.APP_VERSION_CODE,
-      phone_uuid: OrderKuota.PHONE_UUID,
-      auth_username: this.username,
-      auth_token: this.authToken,
-      'requests[0]': 'account',
-      app_version_name: OrderKuota.APP_VERSION_NAME,
-      ui_mode: 'light',
-      phone_model: OrderKuota.PHONE_MODEL,
-    });
-    return await this.request('POST', `${OrderKuota.API_URL}/get`, payload);
-  }
 }
 
 // === UTIL ===
@@ -161,7 +147,7 @@ function convertCRC16(str) {
   return ("000" + (crc & 0xFFFF).toString(16).toUpperCase()).slice(-4);
 }
 function generateTransactionId() {
-  return `RyuuXiao${crypto.randomBytes(2).toString('hex').toUpperCase()}`;
+  return `JARROFFC-${crypto.randomBytes(2).toString('hex').toUpperCase()}`;
 }
 function generateExpirationTime() {
   const expirationTime = new Date();
@@ -169,120 +155,131 @@ function generateExpirationTime() {
   return expirationTime;
 }
 
-// === EXPORT ROUTES ===
-module.exports = (app) => {
+// === ROUTES ===
 app.get("/orderkuota/getotp", async (req, res) => {
   const { apikey, username, password } = req.query;
-  if (!global.apikey.includes(apikey)) return res.json({ creator: "RyuuXiao Officiall", status: false, error: "Apikey invalid" });
-  if (!username || !password) return res.json({ creator: "RyuuXiao Officiall", status: false, error: "Missing username/password" });
+  if (!global.apikeyp.includes(apikey)) return res.json({ creator: "Jarr Officiall", status: false, error: "Apikey invalid" });
+  if (!username || !password) return res.json({ creator: "Jarr Officiall", status: false, error: "Missing username/password" });
 
   try {
     const ok = new OrderKuota();
     const login = await ok.loginRequest(username, password);
 
-    // ambil hint OTP (biasanya email/nomor hp tersembunyi)
-    const otp_type = login?.otp || "unknown";
-    const otp_value = login?.otp_value || "-";
-
     res.json({
-      creator: "RyuuXiao Officiall",
+      creator: "Jarr Officiall",
       status: true,
       result: {
-        otp: otp_type,
-        otp_value: otp_value
+        otp: login?.otp || "unknown",
+        otp_value: login?.otp_value || "-"
       }
     });
   } catch (err) {
-    res.status(500).json({ creator: "RyuuXiao Officiall", status: false, error: err.message });
+    res.status(500).json({ creator: "Jarr Officiall", status: false, error: err.message });
   }
 });
 
-  app.get("/orderkuota/gettoken", async (req, res) => {
-    const { apikey, username, otp } = req.query;
-    if (!global.apikey.includes(apikey)) return res.json({ status: false, error: "Apikey invalid" });
-    if (!username || !otp) return res.json({ status: false, error: "Missing username/otp" });
+app.get("/orderkuota/gettoken", async (req, res) => {
+  const { apikey, username, otp } = req.query;
+  if (!global.apikeyp.includes(apikey)) return res.json({ creator: "Jarr Officiall", status: false, error: "Apikey invalid" });
+  if (!username || !otp) return res.json({ creator: "Jarr Officiall", status: false, error: "Missing username/otp" });
 
-    try {
-      const ok = new OrderKuota();
-      const login = await ok.getAuthToken(username, otp);
-      res.json({ status: true, result: login });
-    } catch (err) {
-      res.status(500).json({ status: false, error: err.message });
-    }
-  });
+  try {
+    const ok = new OrderKuota();
+    const login = await ok.getAuthToken(username, otp);
+    res.json({
+      creator: "Jarr Officiall",
+      status: true,
+      result: login
+    });
+  } catch (err) {
+    res.status(500).json({ creator: "Jarr Officiall", status: false, error: err.message });
+  }
+});
 
-  app.get("/orderkuota/mutasiqr", async (req, res) => {
-    const { apikey, username, token } = req.query;
-    if (!global.apikey.includes(apikey)) return res.json({ status: false, error: "Apikey invalid" });
-    if (!username || !token) return res.json({ status: false, error: "Missing username/token" });
+app.get("/orderkuota/mutasiqr", async (req, res) => {
+  const { apikey, username, token } = req.query;
+  if (!global.apikeyp.includes(apikey)) return res.json({ creator: "Jarr Officiall", status: false, error: "Apikey invalid" });
+  if (!username || !token) return res.json({ creator: "Jarr Officiall", status: false, error: "Missing username/token" });
 
-    try {
-      const ok = new OrderKuota(username, token);
-      let login = await ok.getTransactionQris();
-      login = login.qris_history?.results || login;
-      res.json({ status: true, result: login });
-    } catch (err) {
-      res.status(500).json({ status: false, error: err.message });
-    }
-  });
+  try {
+    const ok = new OrderKuota(username, token);
+    let login = await ok.getTransactionQris();
+    res.json({
+      creator: "Jarr Officiall",
+      status: true,
+      result: login.qris_history?.results || login
+    });
+  } catch (err) {
+    res.status(500).json({ creator: "Jarr Officiall", status: false, error: err.message });
+  }
+});
 
-  app.get("/orderkuota/profile", async (req, res) => {
-    const { apikey, username, token } = req.query;
-    if (!global.apikey.includes(apikey)) return res.json({ status: false, error: "Apikey invalid" });
-    if (!username || !token) return res.json({ status: false, error: "Missing username/token" });
+app.get("/orderkuota/profile", async (req, res) => {
+  const { apikey, username, token } = req.query;
+  if (!global.apikeyp.includes(apikey)) return res.json({ creator: "Jarr Officiall", status: false, error: "Apikey invalid" });
+  if (!username || !token) return res.json({ creator: "Jarr Officiall", status: false, error: "Missing username/token" });
 
-    try {
-      const ok = new OrderKuota(username, token);
-      const profile = await ok.getAccount();
-      const result = profile?.account || profile;
-      res.json({ status: true, result });
-    } catch (err) {
-      res.status(500).json({ status: false, error: err.message });
-    }
-  });
+  try {
+    const ok = new OrderKuota(username, token);
+    let login = await ok.getTransactionQris();
+    res.json({
+      creator: "Jarr Officiall",
+      status: true,
+      result: login.account || login
+    });
+  } catch (err) {
+    res.status(500).json({ creator: "Jarr Officiall", status: false, error: err.message });
+  }
+});
 
-  app.get("/orderkuota/createpayment", async (req, res) => {
-    const { apikey, username, token, amount } = req.query;
-    if (!global.apikey.includes(apikey)) return res.json({ status: false, error: "Apikey invalid" });
-    if (!username || !token || !amount) return res.json({ status: false, error: "Missing parameter" });
+app.get("/orderkuota/createpayment", async (req, res) => {
+  const { apikey, username, token, amount } = req.query;
+  if (!global.apikeyp.includes(apikey)) return res.json({ creator: "Jarr Officiall", status: false, error: "Apikey invalid" });
+  if (!username || !token || !amount) return res.json({ creator: "Jarr Officiall", status: false, error: "Missing parameter" });
 
-    try {
-      const ok = new OrderKuota(username, token);
-      const qrcodeResp = await ok.generateQr(amount);
-      const qrisData = qrcodeResp?.qris_merchant_terms?.results?.qris_data;
-      if (!qrisData) return res.status(400).json({ status: false, error: "QRIS generation failed", raw: qrcodeResp });
+  try {
+    const ok = new OrderKuota(username, token);
+    const qrcodeResp = await ok.generateQr(amount);
+    const qrisData = qrcodeResp?.qris_merchant_terms?.results?.qris_data;
+    if (!qrisData) return res.status(400).json({ creator: "Jarr Officiall", status: false, error: "QRIS generation failed", raw: qrcodeResp });
 
-      let qrisString = qrisData.slice(0, -4).replace("010211", "010212");
-      const final = qrisString + convertCRC16(qrisString);
+    let qrisString = qrisData.slice(0, -4).replace("010211", "010212");
+    const final = qrisString + convertCRC16(qrisString);
 
-      const buffer = await QRCode.toBuffer(final);
-      const base64 = buffer.toString("base64");
+    const buffer = await QRCode.toBuffer(final);
+    const base64 = buffer.toString("base64");
 
-      res.json({
-        status: true,
-        result: {
-          idtransaksi: generateTransactionId(),
-          jumlah: amount,
-          expired: generateExpirationTime(),
-          imageqris: `data:image/png;base64,${base64}`
-        }
-      });
-    } catch (err) {
-      res.status(500).json({ status: false, error: err.message });
-    }
-  });
+    res.json({
+      creator: "Jarr Officiall",
+      status: true,
+      result: {
+        idtransaksi: generateTransactionId(),
+        jumlah: amount,
+        expired: generateExpirationTime(),
+        imageqris: `data:image/png;base64,${base64}`
+      }
+    });
+  } catch (err) {
+    res.status(500).json({ creator: "Jarr Officiall", status: false, error: err.message });
+  }
+});
 
-  app.get("/orderkuota/wdqr", async (req, res) => {
-    const { apikey, username, token, amount } = req.query;
-    if (!global.apikey.includes(apikey)) return res.json({ status: false, error: "Apikey invalid" });
-    if (!username || !token || !amount) return res.json({ status: false, error: "Missing parameter" });
+app.get("/orderkuota/wdqr", async (req, res) => {
+  const { apikey, username, token, amount } = req.query;
+  if (!global.apikeyp.includes(apikey)) return res.json({ creator: "Jarr Officiall", status: false, error: "Apikey invalid" });
+  if (!username || !token || !amount) return res.json({ creator: "Jarr Officiall", status: false, error: "Missing parameter" });
 
-    try {
-      const ok = new OrderKuota(username, token);
-      const wd = await ok.withdrawalQris(amount);
-      res.json({ status: true, result: wd });
-    } catch (err) {
-      res.status(500).json({ status: false, error: err.message });
-    }
-  });
-};
+  try {
+    const ok = new OrderKuota(username, token);
+    const wd = await ok.withdrawalQris(amount);
+    res.json({
+      creator: "Jarr Officiall",
+      status: true,
+      result: wd
+    });
+  } catch (err) {
+    res.status(500).json({ creator: "Jarr Officiall", status: false, error: err.message });
+  }
+});
+
+module.exports = app;
