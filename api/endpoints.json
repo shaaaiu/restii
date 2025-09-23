@@ -115,14 +115,14 @@
       "name": "Get Otp",
       "desc": "Otp  Order Kuota",
       "status": "Active",
-      "path": "/orderkuota/profile?apikey=&username=&password=",
+      "path": "/orderkuota/getotp?apikey=&username=&password=",
       "premium": true
     },
     {
-      "name": "Otp Orkut",
-      "desc": "Order Kuota Get Otp",
+      "name": "Token Orkut",
+      "desc": "Order Kuota Get Token",
       "status": "Active",
-      "path": "/orderkuota/otp?apikey=&username=&otp=",
+      "path": "/orderkuota/gettoken?apikey=&username=&otp=",
       "premium": true
     },
     {
