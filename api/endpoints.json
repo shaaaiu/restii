@@ -108,7 +108,7 @@
       "name": "Cek Profile",
       "desc": "Profile Order Kuota",
       "status": "Error",
-      "path": "/orderkuota/createpayment?apikey=&username=&token=",
+      "path": "/orderkuota/profile?apikey=&username=&token=",
       "premium": true
     },
     {
