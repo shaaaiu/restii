@@ -107,22 +107,36 @@
     {
       "name": "Cek Profile",
       "desc": "Profile Order Kuota",
-      "status": "Error",
+      "status": "Active",
       "path": "/orderkuota/profile?apikey=&username=&token=",
       "premium": true
     },
     {
-      "name": "Cek Status",
-      "desc": "Cek status payment",
-      "status": "Error",
-      "path": "/orderkuota/cekstatus?merchant=&keyorkut=&apikey=",
+      "name": "Profile",
+      "desc": "Cek Profile Order Kuota",
+      "status": "Active",
+      "path": "/orderkuota/profile?apikey=&username=&password=",
       "premium": true
     },
     {
-      "name": "Cek Saldo",
-      "desc": "To check the balance of the quota order account",
-      "status": "Error",
-      "path": "/tools/ceksaldo?memberID=&pin=&password=&apikey=",
+      "name": "Otp Orkut",
+      "desc": "Order Kuota Get Otp",
+      "status": "Active",
+      "path": "/orderkuota/otp?apikey=&username=&otp=",
+      "premium": true
+    },
+    {
+      "name": "Generate Qris",
+      "desc": "Order Kuota Qris",
+      "status": "Active",
+      "path": "/orderkuota/createpayment?apikey=&username=&token=&amount=",
+      "premium": true
+    },
+    {
+      "name": "Mutasi Qris",
+      "desc": "Order Kuota Mutasi Qris",
+      "status": "Active",
+      "path": "/orderkuota/mutasiqr?apikey=&username=&token=",
       "premium": true
     }
   ],
