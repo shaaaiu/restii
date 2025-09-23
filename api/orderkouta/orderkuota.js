@@ -1,8 +1,8 @@
-const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
-const { URLSearchParams } = require('url');
-const crypto = require("crypto");
-const QRCode = require('qrcode');
-const { ImageUploadService } = require('node-upload-images');
+import fetch from 'node-fetch';
+import { URLSearchParams } from 'url';
+import crypto from 'crypto';
+import QRCode from 'qrcode';
+import { ImageUploadService } from 'node-upload-images';
 
 // CLASS OrderKuota
 class OrderKuota {
@@ -74,7 +74,6 @@ class OrderKuota {
         });
 
         const endpoint = userId ? `${OrderKuota.API_URL}/qris/mutasi/${userId}` : `${OrderKuota.API_URL}/get`;
-
         return await this.request('POST', endpoint, payload);
     }
 
@@ -95,15 +94,12 @@ class OrderKuota {
         });
 
         const response = await this.request('POST', `${OrderKuota.API_URL}/get`, payload);
-
         try {
             if (response.success && response.qris_merchant_terms && response.qris_merchant_terms.results) {
                 return response.qris_merchant_terms.results;
             }
-            // Return the full response if the expected path is not found
             return response;
         } catch (err) {
-            // Catch and return any error
             return { error: err.message, raw: response };
         }
     }
@@ -149,7 +145,6 @@ class OrderKuota {
                 return data;
             } else {
                 const data = await res.text();
-                // Attempt to parse text as JSON, if it fails return the text
                 try {
                     return JSON.parse(data);
                 } catch (e) {
@@ -210,7 +205,7 @@ async function createQRIS(amount, codeqr) {
 }
 
 // ROUTE EXPORT
-module.exports = [
+export default [
     {
         name: "Get OTP (tahap 1)",
         desc: "Get OTP Orderkuota",
@@ -354,4 +349,3 @@ module.exports = [
         }
     }
 ];
-
