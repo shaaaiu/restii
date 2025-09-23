@@ -129,6 +129,24 @@ class OrderKuota {
     });
     return await this.request('POST', `${OrderKuota.API_URL}/get`, payload);
   }
+
+  // === BARU: Ambil profil/account doang ===
+  async getAccount() {
+    const payload = new URLSearchParams({
+      request_time: Date.now(),
+      app_reg_id: OrderKuota.APP_REG_ID,
+      phone_android_version: OrderKuota.PHONE_ANDROID_VERSION,
+      app_version_code: OrderKuota.APP_VERSION_CODE,
+      phone_uuid: OrderKuota.PHONE_UUID,
+      auth_username: this.username,
+      auth_token: this.authToken,
+      'requests[0]': 'account',
+      app_version_name: OrderKuota.APP_VERSION_NAME,
+      ui_mode: 'light',
+      phone_model: OrderKuota.PHONE_MODEL,
+    });
+    return await this.request('POST', `${OrderKuota.API_URL}/get`, payload);
+  }
 }
 
 // === UTIL ===
@@ -203,8 +221,9 @@ module.exports = (app) => {
 
     try {
       const ok = new OrderKuota(username, token);
-      let login = await ok.getTransactionQris(); // contoh ambil profil dari request yg sama
-      res.json({ status: true, result: login });
+      const profile = await ok.getAccount();
+      const result = profile?.account || profile;
+      res.json({ status: true, result });
     } catch (err) {
       res.status(500).json({ status: false, error: err.message });
     }
