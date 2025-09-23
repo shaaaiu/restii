@@ -161,7 +161,7 @@ function convertCRC16(str) {
   return ("000" + (crc & 0xFFFF).toString(16).toUpperCase()).slice(-4);
 }
 function generateTransactionId() {
-  return `JARROFFC-${crypto.randomBytes(2).toString('hex').toUpperCase()}`;
+  return `RyuuXiao${crypto.randomBytes(2).toString('hex').toUpperCase()}`;
 }
 function generateExpirationTime() {
   const expirationTime = new Date();
@@ -171,19 +171,31 @@ function generateExpirationTime() {
 
 // === EXPORT ROUTES ===
 module.exports = (app) => {
-  app.get("/orderkuota/getotp", async (req, res) => {
-    const { apikey, username, password } = req.query;
-    if (!global.apikey.includes(apikey)) return res.json({ status: false, error: "Apikey invalid" });
-    if (!username || !password) return res.json({ status: false, error: "Missing username/password" });
+app.get("/orderkuota/getotp", async (req, res) => {
+  const { apikey, username, password } = req.query;
+  if (!global.apikey.includes(apikey)) return res.json({ creator: "RyuuXiao Officiall", status: false, error: "Apikey invalid" });
+  if (!username || !password) return res.json({ creator: "RyuuXiao Officiall", status: false, error: "Missing username/password" });
 
-    try {
-      const ok = new OrderKuota();
-      const login = await ok.loginRequest(username, password);
-      res.json({ status: true, result: login });
-    } catch (err) {
-      res.status(500).json({ status: false, error: err.message });
-    }
-  });
+  try {
+    const ok = new OrderKuota();
+    const login = await ok.loginRequest(username, password);
+
+    // ambil hint OTP (biasanya email/nomor hp tersembunyi)
+    const otp_type = login?.otp || "unknown";
+    const otp_value = login?.otp_value || "-";
+
+    res.json({
+      creator: "RyuuXiao Officiall",
+      status: true,
+      result: {
+        otp: otp_type,
+        otp_value: otp_value
+      }
+    });
+  } catch (err) {
+    res.status(500).json({ creator: "RyuuXiao Officiall", status: false, error: err.message });
+  }
+});
 
   app.get("/orderkuota/gettoken", async (req, res) => {
     const { apikey, username, otp } = req.query;
