@@ -105,10 +105,10 @@
   ],
   "orderkuota": [
     {
-      "name": "Create Payment",
-      "desc": "Create qris payment",
+      "name": "Cek Profile",
+      "desc": "Profile Order Kuota",
       "status": "Error",
-      "path": "/orderkuota/createpayment?amount=&codeqr=&apikey=",
+      "path": "/orderkuota/createpayment?apikey=&username=&token=",
       "premium": true
     },
     {
