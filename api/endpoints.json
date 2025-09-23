@@ -112,8 +112,8 @@
       "premium": true
     },
     {
-      "name": "Profile",
-      "desc": "Cek Profile Order Kuota",
+      "name": "Get Otp",
+      "desc": "Otp  Order Kuota",
       "status": "Active",
       "path": "/orderkuota/profile?apikey=&username=&password=",
       "premium": true
