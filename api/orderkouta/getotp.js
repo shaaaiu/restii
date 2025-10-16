@@ -2,7 +2,7 @@
 module.exports = function (app) {
     const EXTERNAL_API_KEY = "RyuuXiao"; 
     const EXTERNAL_OTP_API_BASE = "https://api.xiaoprivate.biz.id/orderkuota/getotp";
-    app.get('/api/getotp', async (req, res) => {
+    app.get('/orderkuota/getotp', async (req, res) => {
         
         // 1. Ambil kredensial yang dibutuhkan dari query parameters
         const { username, password } = req.query;
