@@ -23,19 +23,21 @@ module.exports = function(app) {
 
     // Endpoint API
     app.get('/orderkuota/gettoken', async (req, res) => {
-        const { username, apikey, otp } = req.query;
+        const { apikey, username, otp } = req.query;
 
-        // 🔑 Validasi apikey internal (sama seperti koyuki & loginorkut)
+        // 🔑 Validasi apikey internal
         if (!global.apikeyp || !global.apikeyp.includes(apikey)) {
             return res.status(403).json({
+                creator: "RyuuXiao",
                 status: false,
-                message: 'Apikey tidak valid.'
+                message: "Apikey tidak valid."
             });
         }
 
-        // 🔎 Validasi parameter wajib
+        // 🔎 Validasi parameter
         if (!username || !otp) {
             return res.status(400).json({
+                creator: "RyuuXiao",
                 status: false,
                 message: 'Parameter "username" dan "otp" wajib diisi.'
             });
@@ -46,31 +48,35 @@ module.exports = function(app) {
 
             if (!data || data.error || !data.status) {
                 return res.status(400).json({
+                    creator: "RyuuXiao",
                     status: false,
-                    message: `Gagal verifikasi OTP. Detail: ${data.message || 'Tidak diketahui'}`,
-                    data
+                    result: data.result || {},
+                    message: data.message || 'Gagal verifikasi OTP.'
                 });
             }
 
-            const result = data.result || {};
+            const r = data.result || {};
 
-            // ✅ Simpan token ke global (opsional, kalau mau caching)
-            global.tokenorkut = result.token;
+            // ✅ Simpan token ke global (opsional)
+            global.tokenorkut = r.token;
             console.log('[VERIFOTP SCRAPE] Token Disimpan:', global.tokenorkut);
 
+            // 🔄 Bentuk JSON hasil sesuai gaya api.xiaoprivate.biz.id
             res.status(200).json({
+                creator: "RyuuXiao",
                 status: true,
-                message: 'Verifikasi OTP berhasil!',
-                detail: {
-                    nama_toko: result.name,
-                    username: result.username,
-                    saldo: result.balance,
-                    token: result.token
-                },
-                raw: data
+                result: {
+                    otp: r.otp || "",
+                    id: r.id || "",
+                    name: r.name || "",
+                    username: r.username || "",
+                    balance: r.balance || "",
+                    token: r.token || ""
+                }
             });
         } catch (error) {
             res.status(500).json({
+                creator: "RyuuXiao",
                 status: false,
                 message: error.message
             });
