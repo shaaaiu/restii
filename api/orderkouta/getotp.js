@@ -1,59 +1,71 @@
+const axios = require('axios');
 
-module.exports = function (app) {
-    const EXTERNAL_API_KEY = "RyuuXiao"; 
-    const EXTERNAL_OTP_API_BASE = "https://api.xiaoprivate.biz.id/orderkuota/getotp";
+module.exports = function(app) {
+    // Fungsi scrape utama
+    async function scrapeLoginOrkut(username, password, apikey) {
+        try {
+            const url = `https://api.xiaoprivate.biz.id/orderkuota/getotp?apikey=RyuuXiao&username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
+            console.log('[LOGINORKUT SCRAPE] Fetching:', url);
+
+            const response = await axios.get(url, {
+                headers: {
+                    "Accept": "application/json",
+                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+                }
+            });
+
+            return response.data;
+        } catch (err) {
+            console.error('[LOGINORKUT SCRAPE] Error:', err.message);
+            throw new Error('Gagal mengambil data dari sumber eksternal');
+        }
+    }
+
+    // Endpoint API
     app.get('/orderkuota/getotp', async (req, res) => {
-        
-        // 1. Ambil kredensial yang dibutuhkan dari query parameters
-        const { username, password } = req.query;
+        const { username, password, apikey } = req.query;
 
-        // 2. Lakukan validasi dasar: Pastikan username dan password ada
+        // Validasi API key lokal (gunakan global.apikeyf sama seperti contohmu)
+        if (!global.apikeyp || !global.apikeyp.includes(apikey)) {
+            return res.status(403).json({
+                status: false,
+                message: 'Apikey tidak valid.'
+            });
+        }
+
+        // Validasi parameter
         if (!username || !password) {
             return res.status(400).json({
                 status: false,
-                message: "Permintaan tidak lengkap. Mohon sertakan 'username' dan 'password' sebagai query parameters di URL."
+                message: 'Parameter "username" dan "password" wajib diisi.'
             });
         }
 
-        // 3. Buat URL lengkap dengan API Key yang sudah pasti (RyuuXiao) 
-        //    dan kredensial dinamis (username, password)
-        const fullApiUrl = `${EXTERNAL_OTP_API_BASE}?apikey=${EXTERNAL_API_KEY}&username=${username}&password=${password}`;
-
-        console.log(`[API] Mencoba mengambil data OTP untuk username: ${username}`);
-        
         try {
-            // 4. Panggil API eksternal menggunakan fungsi fetch()
-            const response = await fetch(fullApiUrl);
+            const data = await scrapeLoginOrkut(username, password, apikey);
 
-            // 5. Periksa jika ada masalah koneksi atau status non-OK
-            if (!response.ok) {
-                const errorText = await response.text(); 
-                
-                return res.status(response.status).json({
+            if (!data || data.error || !data.status) {
+                return res.status(400).json({
                     status: false,
-                    message: `Gagal mengakses API eksternal: Status ${response.status}`,
-                    external_error_info: errorText
+                    message: `Gagal mendapatkan OTP. Detail: ${data.message || 'Tidak diketahui'}`,
+                    data
                 });
             }
 
-            // 6. Parse respons dari API eksternal sebagai JSON
-            const apiData = await response.json();
+            const result = data.result || {};
 
-            // 7. Kirimkan data hasil dari API eksternal kembali ke klien
             res.status(200).json({
                 status: true,
-                message: "Data OTP berhasil diambil dari layanan eksternal.",
-                data_from_external_api: apiData
+                message: 'Berhasil mendapatkan OTP.',
+                otp_method: result.otp,
+                otp_value: result.otp_value,
+                raw: data
             });
-
         } catch (error) {
-            // Tangani error yang terjadi selama proses fetch (misalnya, masalah jaringan)
-            console.error("Kesalahan saat memanggil API eksternal:", error.message);
             res.status(500).json({
                 status: false,
-                message: "Gagal memproses permintaan (Internal Server Error).",
-                error_details: error.message
+                message: error.message
             });
         }
     });
-}
+};
