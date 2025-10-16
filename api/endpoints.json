@@ -115,7 +115,7 @@
       "name": "Get Otp",
       "desc": "Otp  Order Kuota",
       "status": "Active",
-      "path": "/api/orderkuota/getotp?apikey=&username=&password=",
+      "path": "/orderkuota/getotp?apikey=&username=&password=",
       "premium": true
     },
     {
