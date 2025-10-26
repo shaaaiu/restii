@@ -3,7 +3,7 @@ const axios = require('axios');
 module.exports = function(app) {
 // scrape mutasiqr
   async function scrapeMutasiQR(username, apikey, token) {
-    const url = `https://api.xiaoprivate.biz.id/orderkuota/mutasiqr?apikey=${apikey}&username=${encodeURIComponent(username)}&token=${encodeURIComponent(token)}`;
+    const url = `https://api.verlangid.com/orderkuota/mutasiqr?apikey=verlangid&username=${encodeURIComponent(username)}&token=${encodeURIComponent(token)}`;
     console.log('[SCRAPE] mutasiqr URL:', url);
     try {
       const resp = await axios.get(url, {
